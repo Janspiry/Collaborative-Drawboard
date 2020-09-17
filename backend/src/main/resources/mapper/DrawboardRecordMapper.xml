@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unknown.drawboard.mapper.DrawboardRecordMapper">
+    <insert id="addRecord" useGeneratedKeys="true">
+        INSERT INTO drawboard_record
+        (user_id, drawboard_id) VALUES
+            (#{user_id}, #{drawboard_id})
+    </insert>
+    <select id="getRecordList" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            v.id id,
+            u.id drawboard_id,
+            u.session_id sesssionId,
+            u.user_id   userId,
+            DATE_FORMAT(create_time, '%Y.%m.%d %T')   createTime,
+            DATE_FORMAT(update_time, '%Y.%m.%d %T')   updateTime,
+            name name
+        FROM drawboard u,drawboard_record v
+        WHERE u.id=v.drawboard_id
+        and v.user_id= #{user_id}
+    </select>
+</mapper>

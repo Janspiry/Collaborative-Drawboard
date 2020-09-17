@@ -1,0 +1,17 @@
+spring:
+  datasource:
+      url: jdbc:mysql://localhost:3306/drawboard?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+      username: root
+      password: 1234
+mybatis:
+   mapperLocations: classpath:/mapper/*.xml
+mapper:
+ # 多个接口时逗号隔开
+   mappers: com.unknown.drawboard.base.Mapper
+   # insert 和 update 中，判断字符串类型 != ''
+   not-empty: false
+   # 取回主键的方式
+   identity: MYSQL
+ #最大请求头，否则传输会受限制
+server:
+   max-http-header-size: 1024000
